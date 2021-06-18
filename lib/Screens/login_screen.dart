@@ -1,3 +1,4 @@
+import 'package:blood_source/Screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -13,8 +14,18 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.all(10.0),
         child: Column(
           children: [
-            Image.asset('user_default.png'), //TODO image unloading
-            Text('Hello')
+            Image.asset('assets/images/user_default.png'), //TODO image unloading
+            Image.asset('assets/images/user_profile_pic_default.jpg'), //TODO image unloading
+            Text('Hello'),
+            ElevatedButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder:(_) => Dashboard(),
+                  ),
+                  );
+                },
+                child: Text('Log IN',style: TextStyle(fontSize: 20.0),)
+            )
           ],
         ),
       ),
