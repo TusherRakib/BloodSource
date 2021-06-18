@@ -1,4 +1,5 @@
 import 'package:blood_source/Screens/dashboard_screen.dart';
+import 'package:blood_source/Screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class BloodSource extends StatelessWidget {
         accentColor: Color(0xFFFEF9EB),
       ),
 
-      home: Dashboard(),
+      home: Login(),
     );
   }
 }
