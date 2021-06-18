@@ -16,6 +16,7 @@ class BloodSource extends StatelessWidget {
         primarySwatch: Colors.red,
         accentColor: Color(0xFFFEF9EB),
       ),
+
       home: Dashboard(),
     );
   }
