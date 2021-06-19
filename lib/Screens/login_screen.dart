@@ -1,4 +1,6 @@
 import 'package:blood_source/Screens/dashboard_screen.dart';
+import 'package:blood_source/Widgets/create_account_text.dart';
+import 'package:blood_source/Widgets/forgot_password_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,18 +16,17 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding:
-              EdgeInsets.fromLTRB(10, 130, 10, 10),
+          padding: EdgeInsets.fromLTRB(10, 130, 10, 10),
           child: Column(
             children: [
               Container(
-                  height: 250,
+                  height: 210,
                   width: 200,
                   child: SvgPicture.asset(
                     'assets/images/logo.svg',
                     fit: BoxFit.cover,
                   )),
-              SizedBox(height: 80.0),
+              SizedBox(height: 40.0),
               Text(
                 'Welcome Back',
                 style: TextStyle(
@@ -38,26 +39,46 @@ class _LoginState extends State<Login> {
                 'Sign to continue',
                 style: TextStyle(color: Colors.grey[700]),
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    icon: Icon(
-                      Icons.mail,
-                      color: Colors.grey,
-                    ),
-                    labelText: 'Email'),
+              SizedBox(height: 10),
+              Material(
+                elevation: 2.0,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      icon: Icon(
+                        Icons.mail,
+                        color: Colors.grey,
+                      ),
+                      hintText: 'Email'),
+                ),
               ),
-              TextFormField(
-                obscureText: true,
-                decoration: InputDecoration(
-                    border: UnderlineInputBorder(),
-                    icon: Icon(
-                      Icons.lock,
-                      color: Colors.grey,
-                    ),
-                    labelText: 'Password'),
+              SizedBox(height: 30.0),
+              Material(
+                elevation: 2.0,
+                child: TextFormField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      icon: Icon(
+                        Icons.lock,
+                        color: Colors.grey,
+                      ),
+                      hintText: 'Password'),
+                ),
               ),
-              ElevatedButton(
+              SizedBox(height: 10.0),
+              Align(
+                alignment: Alignment.topRight,
+                child: ForgotPassword()
+              ),
+              SizedBox(height: 30.0),
+              Container(
+                height: 40,
+                width: 380,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -67,9 +88,14 @@ class _LoginState extends State<Login> {
                     );
                   },
                   child: Text(
-                    'Log IN',
+                    'LOGIN',
                     style: TextStyle(fontSize: 20.0),
-                  ))
+                  ),
+                ),
+              ),
+              //TODO Modify the padding with something else. Its a temporary fix
+              SizedBox(height: 10.0),
+              CreateAccount(),
             ],
           ),
         ),
