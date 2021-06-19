@@ -1,3 +1,4 @@
+import 'package:blood_source/Widgets/CustomButton_widget.dart';
 import 'package:blood_source/Widgets/bloodGroupSelector_widget.dart';
 import 'package:blood_source/Widgets/locationSelector_screen.dart';
 import 'package:blood_source/main.dart';
@@ -12,9 +13,10 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
+    var val = "Search Donor";
     return Scaffold(
         backgroundColor: Theme.of(context).accentColor,
-        appBar: AppBar(
+        /*appBar: AppBar(
         backgroundColor: Color(0xFFDE2C2C),
         leading: IconButton(
           icon: Icon(Icons.menu),
@@ -39,24 +41,30 @@ class _DashboardState extends State<Dashboard> {
             onPressed: (){},
           ),
         ],
-      ),
-      body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
+      ),*/
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20,70,20,20),
+        child: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Find Donor',
                   style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                Text('Search For Blood Donor around you',style: TextStyle(
+                    fontSize: 18.0,
                 ),
                 ),
-                Text('Search For Blood Donor around you'),
                 SizedBox(height: 30.0,),
-                Text('Chooose Blood Group'),
+                Text('Choose Blood Group',style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold
+                ),),
                 SizedBox(height: 10.0,),
                 Material(
                   elevation: 2.0,
@@ -70,12 +78,16 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 SizedBox(height: 30.0,),
-                Text('Chooose location'),
+                Text('Choose location',style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold
+                ),),
                 SizedBox(height: 10.0,),
                 LocationSelector(),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height,
+                  height: 20,
                 ),
+                CustomButton(buttonText: "Search Donor"),
               ],
             ),
           ),
