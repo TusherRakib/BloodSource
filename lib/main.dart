@@ -16,7 +16,7 @@ class BloodSource extends StatelessWidget {
       title: 'Chat App',
       theme: ThemeData(
         primarySwatch: Colors.red,
-        accentColor: Colors.white,
+        accentColor: Color(0xFFF3F3F3),
       ),
 
       home: Login(),

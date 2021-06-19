@@ -13,7 +13,8 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
+        appBar: AppBar(
         backgroundColor: Color(0xFFDE2C2C),
         leading: IconButton(
           icon: Icon(Icons.menu),
@@ -39,8 +40,8 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
-      body: Container(
-        color: Colors.white,
+      body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Container(
