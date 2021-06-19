@@ -1,6 +1,7 @@
 import 'package:blood_source/Screens/dashboard_screen.dart';
 import 'package:blood_source/Widgets/create_account_text.dart';
 import 'package:blood_source/Widgets/forgot_password_text.dart';
+import 'package:blood_source/Widgets/login_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -42,57 +43,40 @@ class _LoginState extends State<Login> {
               SizedBox(height: 10),
               Material(
                 elevation: 2.0,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      icon: Icon(
-                        Icons.mail,
-                        color: Colors.grey,
-                      ),
-                      hintText: 'Email'),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        icon: Icon(
+                          Icons.mail,
+                          color: Colors.grey,
+                        ),
+                        hintText: 'Email'),
+                  ),
                 ),
               ),
-              SizedBox(height: 30.0),
+              SizedBox(height: 20.0),
               Material(
                 elevation: 2.0,
-                child: TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      icon: Icon(
-                        Icons.lock,
-                        color: Colors.grey,
-                      ),
-                      hintText: 'Password'),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                  child: TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        icon: Icon(
+                          Icons.lock,
+                          color: Colors.grey,
+                        ),
+                        hintText: 'Password'),
+                  ),
                 ),
               ),
               SizedBox(height: 10.0),
-              Align(
-                alignment: Alignment.topRight,
-                child: ForgotPassword()
-              ),
-              SizedBox(height: 30.0),
-              Container(
-                height: 40,
-                width: 380,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Dashboard(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'LOGIN',
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                ),
-              ),
+              Align(alignment: Alignment.topRight, child: ForgotPassword()),
+              SizedBox(height: 20.0),
+              LoginButton(),
               //TODO Modify the padding with something else. Its a temporary fix
               SizedBox(height: 10.0),
               CreateAccount(),

@@ -1,6 +1,6 @@
 import 'package:blood_source/Screens/dashboard_screen.dart';
 import 'package:blood_source/Screens/login_screen.dart';
-import 'package:blood_source/Screens/signIn_screen.dart';
+import 'package:blood_source/Screens/signUp_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
