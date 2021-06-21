@@ -1,3 +1,5 @@
+import 'package:blood_source/Screens/dashboard_screen.dart';
+import 'package:blood_source/Screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -13,7 +15,26 @@ class CustomButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         child: Text(buttonText),
-        onPressed: () {},
+        onPressed: () {
+          if(buttonText== "Log In")
+            {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => Dashboard(),
+                ),
+              );
+            }
+          else if(buttonText == "Sign Up")
+            {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => Login(),
+                ),
+              );
+            }
+        },
         style: ElevatedButton.styleFrom(
             primary: Colors.red,
             textStyle: TextStyle(

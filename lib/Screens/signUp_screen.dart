@@ -1,6 +1,5 @@
-import 'package:blood_source/Screens/login_screen.dart';
+import 'package:blood_source/Widgets/CustomButton_widget.dart';
 import 'package:blood_source/Widgets/login_text.dart';
-import 'package:blood_source/Widgets/signUp_btn.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -111,7 +110,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               SizedBox(height: 30.0),
-              SignUpBtn(),
+              CustomButton(buttonText: "Sign Up"), //Navigate to Login Screen DONE
               SizedBox(height: 10.0),
               LoginText(),
             ],

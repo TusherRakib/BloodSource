@@ -1,8 +1,6 @@
-import 'package:blood_source/Screens/dashboard_screen.dart';
 import 'package:blood_source/Widgets/CustomButton_widget.dart';
 import 'package:blood_source/Widgets/create_account_text.dart';
 import 'package:blood_source/Widgets/forgot_password_text.dart';
-import 'package:blood_source/Widgets/login_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -78,11 +76,7 @@ class _LoginState extends State<Login> {
               SizedBox(height: 10.0),
               Align(alignment: Alignment.topRight, child: ForgotPassword()),
               SizedBox(height: 20.0),
-              LoginButton(), //TODO TUSHER - NOT REQUIRED, DELETE WHEN UNDERSTOOD
-              SizedBox(height: 10.0),
-              CustomButton(buttonText: "Log In"), //TODO TUSHER - All buttons in the app will go to one custom button widget
-
-              //TODO Modify the padding with something else. Its a temporary fix
+              CustomButton(buttonText: "Log In"), //Navigate to Dashboard DONE
               SizedBox(height: 10.0),
               CreateAccount(),
             ],
