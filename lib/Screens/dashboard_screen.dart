@@ -7,16 +7,16 @@ import 'package:blood_source/main.dart';
 import 'package:blood_source/models/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Dashboard extends StatefulWidget {
-
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
   final AuthenticationService _authenticationService =
-  new AuthenticationService();
+      new AuthenticationService();
 
   getAllUsersInfo() async {
     var firebaseAllUsers = await Firestore.instance.collection("user");
@@ -29,6 +29,7 @@ class _DashboardState extends State<Dashboard> {
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     var val = "Search Donor";
@@ -61,34 +62,38 @@ class _DashboardState extends State<Dashboard> {
         ],
       ),*/
         appBar: AppBar(
-          actions: [
-
-
-          ],
+          actions: [],
         ),
         drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
           child: ListView(
-            // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
                 decoration: BoxDecoration(
                   color: Colors.redAccent,
                 ),
-                child: Image(image: AssetImage('images/Screenshot_7.png')),
+                child: SvgPicture.asset(
+                  'assets/images/logo.svg',
+                  fit: BoxFit.cover,
+                ),
               ),
               ListTile(
-                title: Text('Profile',style: TextStyle(fontSize: 18.0,fontFamily: 'OverpassRegular'),),
+                title: Text(
+                  'Profile',
+                  style:
+                      TextStyle(fontSize: 18.0, fontFamily: 'OverpassRegular'),
+                ),
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => UserProfile()));
+                      MaterialPageRoute(builder: (context) => UserProfileOld()));
                 },
               ),
               ListTile(
-                title: Text('Sign Out',style: TextStyle(fontSize: 18.0,fontFamily: 'OverpassRegular'),),
+                title: Text(
+                  'Sign Out',
+                  style:
+                      TextStyle(fontSize: 18.0, fontFamily: 'OverpassRegular'),
+                ),
                 onTap: () {
                   // AuthenticationService().signOut();
                   // Navigator.pushReplacement(context,
@@ -98,57 +103,68 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
         ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20,70,20,20),
-        child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Find Donor',
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+          child: SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Find Donor',
+                    style:
+                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                   ),
-                ),
-                Text('Search For Blood Donor around you',style: TextStyle(
-                    fontSize: 18.0,
-                ),
-                ),
-                SizedBox(height: 30.0,),
-                Text('Choose Blood Group',style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold
-                ),),
-                SizedBox(height: 10.0,),
-                Material(
-                  elevation: 2.0,
-                  child: Container(
+                  Text(
+                    'Search For Blood Donor around you',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Text(
+                    'Choose Blood Group',
+                    style:
+                        TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Material(
+                    elevation: 2.0,
+                    child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20.0),),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
                       ),
-
-                    child: BloodGroupSelector(),
+                      child: BloodGroupSelector(),
+                    ),
                   ),
-                ),
-                SizedBox(height: 30.0,),
-                Text('Choose location',style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold
-                ),),
-                SizedBox(height: 10.0,),
-                LocationSelector(),
-                SizedBox(
-                  height: 20,
-                ),
-                CustomButton(buttonText: "Search Donor"),
-              ],
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Text(
+                    'Choose location',
+                    style:
+                        TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  LocationSelector(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CustomButton(buttonText: "Search Donor"),
+                ],
+              ),
             ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
