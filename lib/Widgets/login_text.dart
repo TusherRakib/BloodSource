@@ -24,7 +24,7 @@ class _LoginTextState extends State<LoginText> {
               ..onTap = () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => Login(),
+                  builder: (_) => LogInScreen(),
                 ),
               ),
           ),

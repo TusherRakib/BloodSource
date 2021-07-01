@@ -24,7 +24,7 @@ class _CreateAccountState extends State<CreateAccount> {
               ..onTap = () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => SignIn(),
+                      builder: (_) => SignUpScreen(),
                     ),
                   ),
           ),

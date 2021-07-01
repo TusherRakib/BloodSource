@@ -20,7 +20,7 @@ class BloodSource extends StatelessWidget {
         accentColor: Color(0xFFF3F3F3),
       ),
 
-      home: UserProfile(),
+      home: LogInScreen(),
     );
   }
 }

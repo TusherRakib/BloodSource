@@ -7,6 +7,8 @@ class SignUpBtn extends StatefulWidget {
 }
 
 class _SignUpBtnState extends State<SignUpBtn> {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +20,7 @@ class _SignUpBtnState extends State<SignUpBtn> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => Login(),
+              builder: (_) => LogInScreen(),
             ),
           );
         },

@@ -33,7 +33,7 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Color(0xFFF9BD7E),
         elevation: 0.0,
         leading: Icon(Icons.menu),
         actions: [
@@ -42,15 +42,43 @@ class _UserProfileState extends State<UserProfile> {
       ),
       body: Column(
         children: [
-          Card(
-            color: Colors.redAccent,
-            child: ListTile(
-              title: Text("Rafid Hussain Khan"),
-              subtitle: Text("App Developer"),
-              leading: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/user_default.png')),
-              //isThreeLine: true,
+          Container(
+            decoration: BoxDecoration(
+                color: Color(0xFFF9BD7E),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(35),
+                    bottomRight: Radius.circular(35),
+                ),
             ),
+            height: 150,
+             child: Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+               CircleAvatar(
+                   radius: 35.0,
+                   backgroundImage: AssetImage('assets/images/user_default.png')
+               ),
+                 SizedBox(width: 20.0,),
+                 Padding(
+                   padding: const EdgeInsets.only(top: 45.0),
+                   child: Column(
+                     children: [
+                       Text("Rafid Hussain Khan",style: TextStyle(fontSize: 35.0,fontWeight: FontWeight.w900),),
+                       Text("App Developer",style: TextStyle(fontSize: 20.0,color: Colors.black45),),
+                     ],
+                   ),
+                 ),
+               ],
+             ),
+            //Center(
+            //   child: ListTile(
+            //     title: Text("Rafid Hussain Khan",style: TextStyle(fontSize: 35.0,fontWeight: FontWeight.bold),),
+            //     subtitle: Text("App Developer"),
+            //     leading: CircleAvatar(
+            //         backgroundImage: AssetImage('assets/images/user_default.png')),
+            //     //isThreeLine: true,
+            //   ),
+            // ),
           )
         ],
       ),

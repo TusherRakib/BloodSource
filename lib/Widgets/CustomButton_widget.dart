@@ -11,12 +11,12 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
+      color: Colors.redAccent,
       height: 50,
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
-        child: Text(buttonText),
+        child: Text(buttonText,style: TextStyle(color: Colors.white),),
         style: ElevatedButton.styleFrom(
-            primary: Colors.red,
             textStyle: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold)),

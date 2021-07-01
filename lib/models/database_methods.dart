@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 class DatabaseMethod {
   uploadUserInfo(userDataMap) async {
     var firebaseUser = await FirebaseAuth.instance.currentUser();
-
     Firestore.instance
         .collection("users")
         .document(firebaseUser.uid)

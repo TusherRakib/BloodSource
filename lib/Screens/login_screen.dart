@@ -8,12 +8,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Login extends StatefulWidget {
+class LogInScreen extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _LogInScreenState createState() => _LogInScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _LogInScreenState extends State<LogInScreen> {
   final formkey = GlobalKey<FormState>();
 
   TextEditingController _passwordController = new TextEditingController();

@@ -5,34 +5,37 @@ import 'package:blood_source/models/authentication.dart';
 import 'package:blood_source/models/database_methods.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final formkey = GlobalKey<FormState>();
 
   TextEditingController _passwordController = new TextEditingController();
   TextEditingController _emailEditingController = new TextEditingController();
   TextEditingController _nameEditingController = new TextEditingController();
-  TextEditingController _phoneNumberEditingController =
-      new TextEditingController();
+  TextEditingController _phoneNumberEditingController = new TextEditingController();
+
+  //TODO Call blood group controller
 
   AuthenticationService _authenticationService = new AuthenticationService();
   DatabaseMethod _databaseMethod = new DatabaseMethod();
 
   RegisterUser() async {
     dynamic result = await _authenticationService.signUpWithEmailAndPassword(
-        _nameEditingController.text.trim(),
         _emailEditingController.text.trim(),
-        _phoneNumberEditingController.text.trim(),
         _passwordController.text.trim());
+
     if (formkey.currentState.validate()) {
       if (result == null) {
         print('Email Invalid');
       } else {
         Map<String, String> userDataMap = {
+
+          //TODO refer blood group
+
           "name": _nameEditingController.text.trim(),
           "email": _emailEditingController.text.trim(),
           "phone": _phoneNumberEditingController.text.trim(),
@@ -40,14 +43,12 @@ class _SignInState extends State<SignIn> {
         };
         await _authenticationService
             .signUpWithEmailAndPassword(
-                _nameEditingController.text.trim(),
-                _emailEditingController.text.trim(),
-                _phoneNumberEditingController.text.trim(),
+                _emailEditingController.text.trim(),  // _phoneNumberEditingController.text.trim(),
                 _passwordController.text.trim())
             .then((result) {
           _databaseMethod.uploadUserInfo(userDataMap);
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Login()));
+              context, MaterialPageRoute(builder: (context) => LogInScreen()));
         });
       }
     }
@@ -56,7 +57,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
+      //backgroundColor: Theme.of(context).accentColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(10, 200, 10, 10),
