@@ -1,7 +1,11 @@
+import 'package:blood_source/Screens/login_screen.dart';
+import 'package:blood_source/Screens/user_profile_screen.dart';
 import 'package:blood_source/Widgets/CustomButton_widget.dart';
 import 'package:blood_source/Widgets/bloodGroupSelector_widget.dart';
 import 'package:blood_source/Widgets/locationSelector_screen.dart';
 import 'package:blood_source/main.dart';
+import 'package:blood_source/models/authentication.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -11,6 +15,20 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final AuthenticationService _authenticationService =
+  new AuthenticationService();
+
+  getAllUsersInfo() async {
+    var firebaseAllUsers = await Firestore.instance.collection("user");
+    Firestore.instance
+        .collection("user")
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((DocumentSnapshot doc) {
+        print(doc.data);
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     var val = "Search Donor";
@@ -42,6 +60,44 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),*/
+        appBar: AppBar(
+          actions: [
+
+
+          ],
+        ),
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                ),
+                child: Image(image: AssetImage('images/Screenshot_7.png')),
+              ),
+              ListTile(
+                title: Text('Profile',style: TextStyle(fontSize: 18.0,fontFamily: 'OverpassRegular'),),
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => UserProfile()));
+                },
+              ),
+              ListTile(
+                title: Text('Sign Out',style: TextStyle(fontSize: 18.0,fontFamily: 'OverpassRegular'),),
+                onTap: () {
+                  // AuthenticationService().signOut();
+                  // Navigator.pushReplacement(context,
+                  //     MaterialPageRoute(builder: (context) => AuthenticationService()));
+                },
+              ),
+            ],
+          ),
+        ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20,70,20,20),
         child: SingleChildScrollView(

@@ -112,6 +112,7 @@ class _SignInState extends State<SignIn> {
                             color: Colors.grey,
                           ),
                           hintText: 'Email'),
+                      keyboardType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value.isEmpty && !value.contains('@')) {
                           return 'Invalid Email Address';
