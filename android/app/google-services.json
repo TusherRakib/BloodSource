@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "530989179857",
+    "project_id": "blood-source",
+    "storage_bucket": "blood-source.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530989179857:android:6b57dba27a6f8968bdb6f0",
+        "android_client_info": {
+          "package_name": "com.example.blood_source"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530989179857-thj746vpt68536htvlddj6ebpj17g0hb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEgqzsUOM-l9riMm-XcMTSAj11Yw8n-MY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530989179857-thj746vpt68536htvlddj6ebpj17g0hb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
