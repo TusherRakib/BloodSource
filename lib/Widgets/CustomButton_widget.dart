@@ -15,26 +15,6 @@ class CustomButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         child: Text(buttonText),
-        onPressed: () {
-          if(buttonText== "Log In")
-            {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => Dashboard(),
-                ),
-              );
-            }
-          else if(buttonText == "Sign Up")
-            {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => Login(),
-                ),
-              );
-            }
-        },
         style: ElevatedButton.styleFrom(
             primary: Colors.red,
             textStyle: TextStyle(
