@@ -1,25 +1,31 @@
+import 'package:blood_source/Screens/user_profile_screen.dart';
 import 'package:blood_source/Widgets/CustomButton_widget.dart';
 import 'package:blood_source/models/authentication.dart';
 import 'package:blood_source/models/database_methods.dart';
 import 'package:flutter/material.dart';
 
-class UpdateProfileScreen extends StatefulWidget {
+class UpdateUserProfileScreen extends StatefulWidget {
   String fetchName;
   String fetchEmail;
   String fetchNumber;
   String fetchLocation;
   String fetchBloodGroup;
 
-  UpdateProfileScreen({this.fetchName, this.fetchEmail, this.fetchNumber, this.fetchBloodGroup, this.fetchLocation});
+  UpdateUserProfileScreen(
+      {this.fetchName,
+      this.fetchEmail,
+      this.fetchNumber,
+      this.fetchBloodGroup,
+      this.fetchLocation});
 
   @override
-  _UpdateProfileScreenState createState() => _UpdateProfileScreenState();
+  _UpdateUserProfileScreenState createState() =>
+      _UpdateUserProfileScreenState();
 }
 
-class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
-  final formkey = GlobalKey<FormState>();
+class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
+  final formKey = GlobalKey<FormState>();
 
-  TextEditingController _passwordController = new TextEditingController();
   TextEditingController _emailEditingController = new TextEditingController();
   TextEditingController _nameEditingController = new TextEditingController();
   TextEditingController _phoneNumberEditingController =
@@ -27,23 +33,36 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   String _chosenBloodGroup;
   String _chosenLocation;
 
-
-  AuthenticationService _authenticationService = new AuthenticationService();
   DatabaseMethod _databaseMethod = new DatabaseMethod();
+
+  UpdateUserData() {
+    Map<String, String> userDataMap = {
+      "name": _nameEditingController.text.trim(),
+      "email": _emailEditingController.text.trim(),
+      "phone": _phoneNumberEditingController.text.trim(),
+      "blood group": _chosenBloodGroup.trim(),
+      "location": _chosenLocation.trim(),
+    };
+
+    _databaseMethod.upDateUserInfo(userDataMap);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => UserProfileScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
-    _nameEditingController.text = widget.fetchName;
-    _emailEditingController.text= widget.fetchEmail;
-    _phoneNumberEditingController.text= widget.fetchNumber;
-    _chosenLocation = widget.fetchLocation;
-    _chosenBloodGroup = widget.fetchBloodGroup;
+    // _nameEditingController.text = widget.fetchName;
+    // _emailEditingController.text = widget.fetchEmail;
+    // _phoneNumberEditingController.text = widget.fetchNumber;
+    // _chosenLocation = widget.fetchLocation;
+    // _chosenBloodGroup = widget.fetchBloodGroup;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(10, 150, 10, 10),
           child: Form(
-            key: formkey,
+            key: formKey,
             child: Column(
               children: [
                 Text(
@@ -279,7 +298,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 GestureDetector(
                   child: CustomButton(buttonText: "Update"),
                   onTap: () {
-
+                    UpdateUserData();
                   },
                 ),
                 //Navigate to Login Screen DONE

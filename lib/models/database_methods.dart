@@ -12,4 +12,15 @@ class DatabaseMethod {
       print(e.toString());
     });
   }
+
+  upDateUserInfo(userDataMap) async {
+    var firebaseUser = await FirebaseAuth.instance.currentUser();
+    Firestore.instance
+        .collection("users")
+        .document(firebaseUser.uid)
+        .updateData(userDataMap)
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
 }

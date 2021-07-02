@@ -1,16 +1,16 @@
 import 'package:blood_source/models/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
-class AuthenticationService{
-
+class AuthenticationService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid) : null;
   }
 
-  Future signUpWithEmailAndPassword(
-      String email, String password) async {
+  Future signUpWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -34,6 +34,16 @@ class AuthenticationService{
     }
   }
 
+  updateUserDate(selectedDoc, newValues) async {
+    Firestore.instance
+        .collection('users')
+        .document(selectedDoc)
+        .updateData(newValues)
+        .catchError((e) {
+          print(e.toString());
+    });
+  }
+
   Future signOut() async {
     try {
       print('logout');
@@ -42,5 +52,4 @@ class AuthenticationService{
       print(e.toString());
     }
   }
-
 }

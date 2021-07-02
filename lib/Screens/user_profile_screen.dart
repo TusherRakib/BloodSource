@@ -1,4 +1,4 @@
-import 'package:blood_source/Screens/update_profile_screen.dart';
+import 'package:blood_source/Screens/update_user_profile_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +55,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
               onPressed: () {
                 var route = new MaterialPageRoute(
-                  builder: (BuildContext context) => new UpdateProfileScreen(
+                  builder: (BuildContext context) => new UpdateUserProfileScreen(
                     fetchName: userName,
                     fetchEmail: userEmail,
                     fetchNumber: userPhone,
