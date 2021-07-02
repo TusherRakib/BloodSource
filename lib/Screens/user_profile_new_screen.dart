@@ -2,15 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class UserProfile extends StatefulWidget {
+class UserProfileScreen extends StatefulWidget {
   @override
-  _UserProfileState createState() => _UserProfileState();
+  _UserProfileScreenState createState() => _UserProfileScreenState();
 }
 
-class _UserProfileState extends State<UserProfile> {
+class _UserProfileScreenState extends State<UserProfileScreen> {
   String userName = "";
   String userEmail = "";
   String userPhone = "";
+  String userBloodGroup = "";
+  String userLocation = "";
 
   fetchUserData() async {
     final firebaseUser = await FirebaseAuth.instance.currentUser();
@@ -23,6 +25,8 @@ class _UserProfileState extends State<UserProfile> {
         userEmail = ds.data['email'];
         userName = ds.data['name'];
         userPhone = ds.data['phone'];
+        userBloodGroup = ds.data['blood group'];
+        userLocation = ds.data['location'];
       }).catchError((e) {
         print(e.toString());
       });
@@ -60,11 +64,36 @@ class _UserProfileState extends State<UserProfile> {
                ),
                  SizedBox(width: 20.0,),
                  Padding(
-                   padding: const EdgeInsets.only(top: 45.0),
+                   padding: EdgeInsets.only(top: 45.0),
                    child: Column(
                      children: [
-                       Text("Rafid Hussain Khan",style: TextStyle(fontSize: 35.0,fontWeight: FontWeight.w900),),
-                       Text("App Developer",style: TextStyle(fontSize: 20.0,color: Colors.black45),),
+                       // Text("Rafid Hussain Khan",style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.w900),),
+                       // Text("App Developer",style: TextStyle(fontSize: 20.0,color: Colors.black45),),
+                       FutureBuilder(
+                         future: fetchUserData(),
+                         builder: (context, snapshot){
+                           if(snapshot.connectionState!= ConnectionState.done)
+                           {
+                             return Text('Loading Name',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.w900));
+                           }
+                           else{
+                             return Text(userName, style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.w900));
+                           }
+                         },
+                       ),
+
+                       FutureBuilder(
+                         future: fetchUserData(),
+                         builder: (context, snapshot){
+                           if(snapshot.connectionState!= ConnectionState.done)
+                           {
+                             return Text('Loading Blood Group',style: TextStyle(fontSize: 20.0,color: Colors.black45));
+                           }
+                           else{
+                             return Text("Blood Group: "+ userBloodGroup, style: TextStyle(fontSize: 20.0,color: Colors.black45));
+                           }
+                         },
+                       )
                      ],
                    ),
                  ),

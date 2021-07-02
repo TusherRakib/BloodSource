@@ -1,9 +1,7 @@
-import 'package:blood_source/Screens/login_screen.dart';
-import 'package:blood_source/Screens/user_profile_screen.dart';
+import 'package:blood_source/Screens/user_profile_new_screen.dart';
 import 'package:blood_source/Widgets/CustomButton_widget.dart';
 import 'package:blood_source/Widgets/bloodGroupSelector_widget.dart';
 import 'package:blood_source/Widgets/locationSelector_screen.dart';
-import 'package:blood_source/main.dart';
 import 'package:blood_source/models/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -84,8 +82,10 @@ class _DashboardState extends State<Dashboard> {
                       TextStyle(fontSize: 18.0, fontFamily: 'OverpassRegular'),
                 ),
                 onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => UserProfileOld()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfileScreen()));
                 },
               ),
               ListTile(

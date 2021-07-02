@@ -16,34 +16,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _passwordController = new TextEditingController();
   TextEditingController _emailEditingController = new TextEditingController();
   TextEditingController _nameEditingController = new TextEditingController();
-  TextEditingController _phoneNumberEditingController = new TextEditingController();
-
-  //TODO Call blood group controller
+  TextEditingController _phoneNumberEditingController =
+      new TextEditingController();
+  String _chosenBloodGroup;
+  String _chosenLocation;
 
   AuthenticationService _authenticationService = new AuthenticationService();
   DatabaseMethod _databaseMethod = new DatabaseMethod();
 
   RegisterUser() async {
     dynamic result = await _authenticationService.signUpWithEmailAndPassword(
-        _emailEditingController.text.trim(),
-        _passwordController.text.trim());
+        _emailEditingController.text.trim(), _passwordController.text.trim());
 
     if (formkey.currentState.validate()) {
       if (result == null) {
-        print('Email Invalid');
+        print('Invalid Data');
       } else {
         Map<String, String> userDataMap = {
-
-          //TODO refer blood group
-
           "name": _nameEditingController.text.trim(),
           "email": _emailEditingController.text.trim(),
           "phone": _phoneNumberEditingController.text.trim(),
+          "blood group": _chosenBloodGroup.trim(),
+          "location": _chosenLocation.trim(),
           "password": _passwordController.text.trim(),
         };
         await _authenticationService
-            .signUpWithEmailAndPassword(
-                _emailEditingController.text.trim(),  // _phoneNumberEditingController.text.trim(),
+            .signUpWithEmailAndPassword(_emailEditingController.text.trim(),
                 _passwordController.text.trim())
             .then((result) {
           _databaseMethod.uploadUserInfo(userDataMap);
@@ -57,10 +55,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Theme.of(context).accentColor,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(10, 200, 10, 10),
+          padding: EdgeInsets.fromLTRB(10, 150, 10, 10),
           child: Form(
             key: formkey,
             child: Column(
@@ -115,7 +112,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           hintText: 'Email'),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
-                        if (value.isEmpty && !value.contains('@')) {
+                        if (value.isEmpty) {
+                          return 'Please Enter Email Address';
+                        } else if (!value.contains('@')) {
                           return 'Invalid Email Address';
                         } else {
                           return null;
@@ -139,7 +138,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           hintText: 'Phone'),
                       validator: (value) {
-                        if (value.isEmpty && value.length < 11) {
+                        if (value.isEmpty) {
+                          return 'Please Enter Phone Number';
+                        } else if (value.length < 11) {
                           return 'Invalid Phone Number';
                         } else {
                           return null;
@@ -149,6 +150,153 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 SizedBox(height: 20.0),
+                Container(
+                  decoration: BoxDecoration(
+                      //borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      //border: Border.all(color: Colors.black)
+                      ),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 15,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 0.0, top: 10.0),
+                    child: Material(
+                      elevation: 2.0,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10.0),
+                          child: DropdownButtonFormField<String>(
+                            focusColor: Colors.white,
+                            value: _chosenBloodGroup,
+                            elevation: 2,
+                            decoration: InputDecoration.collapsed(hintText: ''),
+                            style: TextStyle(color: Colors.white),
+                            iconEnabledColor: Colors.black,
+                            items: <String>[
+                              'A+',
+                              'A-',
+                              'B+',
+                              'B-',
+                              'AB+',
+                              'AB-',
+                              'O+',
+                              'O-',
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              );
+                            }).toList(),
+                            hint: Row(
+                              children: [
+                                Icon(Icons.bloodtype),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10.0),
+                                  child: Text(
+                                    "Blood Group",
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onChanged: (String value) {
+                              setState(() {
+                                _chosenBloodGroup = value;
+                              });
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please Select Blood Group';
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 15,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 0.0, top: 10.0),
+                    child: Material(
+                      elevation: 2.0,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10.0),
+                          child: DropdownButtonFormField<String>(
+                            focusColor: Colors.white,
+                            value: _chosenLocation,
+                            elevation: 2,
+                            decoration: InputDecoration.collapsed(hintText: ''),
+                            style: TextStyle(color: Colors.white),
+                            iconEnabledColor: Colors.black,
+                            items: <String>[
+                              'Dhaka',
+                              'Sylhet',
+                              'Barishal',
+                              'Chittagong',
+                              'Rajshahi',
+                              'Comilla',
+                              'Mymensing',
+                              'Rangpur',
+                              'Khulna',
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              );
+                            }).toList(),
+                            hint: Row(
+                              children: [
+                                Icon(Icons.location_on),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10.0),
+                                  child: Text(
+                                    "Location",
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onChanged: (String value) {
+                              setState(() {
+                                _chosenLocation = value;
+                              });
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please Select Location';
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
                 Material(
                   elevation: 2.0,
                   child: Padding(
@@ -164,8 +312,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           hintText: 'Password'),
                       validator: (value) {
-                        if (value.isEmpty || value.length < 6) {
-                          return 'Invalid Password';
+                        if (value.isEmpty) {
+                          return 'Please Enter Password';
+                        } else if (value.length < 6) {
+                          return 'Password Should Be Minimum 6 Digit Long';
                         } else {
                           return null;
                         }
@@ -188,8 +338,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           hintText: 'Confirm Password'),
                       validator: (value) {
-                        if (value.isEmpty ||
-                            value != _passwordController.text.trim()) {
+                        if (value.isEmpty) {
+                          return 'Please Confirm Password';
+                        } else if (value != _passwordController.text.trim()) {
                           return 'Please Not Matched';
                         } else {
                           return null;
