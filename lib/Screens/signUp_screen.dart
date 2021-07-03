@@ -21,6 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _chosenBloodGroup;
   String _chosenLocation;
 
+  bool _signUpSuccessfull = false;
+
   AuthenticationService _authenticationService = new AuthenticationService();
   DatabaseMethod _databaseMethod = new DatabaseMethod();
 
@@ -32,6 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (result == null) {
         print('Invalid Data');
       } else {
+        _signUpSuccessfull = true;
         Map<String, String> userDataMap = {
           "name": _nameEditingController.text.trim(),
           "email": _emailEditingController.text.trim(),

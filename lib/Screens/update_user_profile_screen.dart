@@ -26,7 +26,6 @@ class UpdateUserProfileScreen extends StatefulWidget {
 class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
   final formKey = GlobalKey<FormState>();
 
-  TextEditingController _emailEditingController = new TextEditingController();
   TextEditingController _nameEditingController = new TextEditingController();
   TextEditingController _phoneNumberEditingController =
       new TextEditingController();
@@ -36,27 +35,22 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
   DatabaseMethod _databaseMethod = new DatabaseMethod();
 
   UpdateUserData() {
-    Map<String, String> userDataMap = {
-      "name": _nameEditingController.text.trim(),
-      "email": _emailEditingController.text.trim(),
-      "phone": _phoneNumberEditingController.text.trim(),
-      "blood group": _chosenBloodGroup.trim(),
-      "location": _chosenLocation.trim(),
-    };
+    if (formKey.currentState.validate() || !formKey.currentState.validate()) {
+      Map<String, String> userDataMap = {
+        "name": _nameEditingController.text.trim(),
+        "phone": _phoneNumberEditingController.text.trim(),
+        "blood group": _chosenBloodGroup.trim(),
+        "location": _chosenLocation.trim(),
+      };
 
-    _databaseMethod.upDateUserInfo(userDataMap);
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => UserProfileScreen()));
+      _databaseMethod.upDateUserInfo(userDataMap);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => UserProfileScreen()));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // _nameEditingController.text = widget.fetchName;
-    // _emailEditingController.text = widget.fetchEmail;
-    // _phoneNumberEditingController.text = widget.fetchNumber;
-    // _chosenLocation = widget.fetchLocation;
-    // _chosenBloodGroup = widget.fetchBloodGroup;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -86,41 +80,14 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                             Icons.account_circle_outlined,
                             color: Colors.grey,
                           ),
-                          hintText: 'Name'),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Name';
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                Material(
-                  elevation: 2.0,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
-                    child: TextFormField(
-                      controller: _emailEditingController,
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          icon: Icon(
-                            Icons.mail,
-                            color: Colors.grey,
-                          ),
-                          hintText: 'Email'),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Email Address';
-                        } else if (!value.contains('@')) {
-                          return 'Invalid Email Address';
-                        } else {
-                          return null;
-                        }
-                      },
+                          hintText: widget.fetchName),
+                      // validator: (value) {
+                      //   if (value.isEmpty) {
+                      //     return 'Please Enter Name';
+                      //   } else {
+                      //     return null;
+                      //   }
+                      // },
                     ),
                   ),
                 ),
@@ -137,16 +104,16 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                             Icons.phone,
                             color: Colors.grey,
                           ),
-                          hintText: 'Phone'),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please Enter Phone Number';
-                        } else if (value.length < 11) {
-                          return 'Invalid Phone Number';
-                        } else {
-                          return null;
-                        }
-                      },
+                          hintText: widget.fetchNumber),
+                      // validator: (value) {
+                      //   if (value.isEmpty) {
+                      //     return 'Please Enter Phone Number';
+                      //   } else if (value.length < 11) {
+                      //     return 'Invalid Phone Number';
+                      //   } else {
+                      //     return null;
+                      //   }
+                      // },
                     ),
                   ),
                 ),
@@ -193,7 +160,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                                 Padding(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: Text(
-                                    "Blood Group",
+                                    widget.fetchBloodGroup,
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
@@ -207,13 +174,13 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                                 _chosenBloodGroup = value;
                               });
                             },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Please Select Blood Group';
-                              } else {
-                                return null;
-                              }
-                            },
+                            // validator: (value) {
+                            //   if (value.isEmpty) {
+                            //     return 'Please Select Blood Group';
+                            //   } else {
+                            //     return null;
+                            //   }
+                            // },
                           ),
                         ),
                       ),
@@ -264,7 +231,7 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                                 Padding(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: Text(
-                                    "Location",
+                                    widget.fetchLocation,
                                     style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
@@ -278,13 +245,13 @@ class _UpdateUserProfileScreenState extends State<UpdateUserProfileScreen> {
                                 _chosenLocation = value;
                               });
                             },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Please Select Location';
-                              } else {
-                                return null;
-                              }
-                            },
+                            // validator: (value) {
+                            //   if (value.isEmpty) {
+                            //     return 'Please Select Location';
+                            //   } else {
+                            //     return null;
+                            //   }
+                            // },
                           ),
                         ),
                       ),
